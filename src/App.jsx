@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar";
+import Footer from "./pages/Footer"
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+        <Footer/>
       </div>
     </>
   );

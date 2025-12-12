@@ -1,17 +1,24 @@
+import HouseGallery from "../components/HouseGallery";
+
 const Gallery = () => {
   return (
-    <main className="max-w-7xl mx-auto px-4 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold mb-4">Gallery</h1>
-      <p className="text-gray-700 mb-4">
-        Showcase your completed projects, designs and site photos here.
-      </p>
+    <>
+   <section className="w-full bg-black text-white h-40 sm:h-52 md:h-64 lg:h-65 flex items-center justify-center">
+      <div className="max-w-6xl mx-auto px-4 flex flex-col items-center text-center">
+        {/* Main heading */}
+      <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-[0.2em] uppercase">
+  Gallery
+</h1>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="bg-gray-200 h-40 rounded-lg" />
-        <div className="bg-gray-200 h-40 rounded-lg" />
-        <div className="bg-gray-200 h-40 rounded-lg" />
+
+        {/* Breadcrumb */}
+        <p className="mt-2 text-[10px] sm:text-xs md:text-sm font-medium tracking-[0.25em] uppercase text-gray-300">
+          Home/Gallery
+        </p>
       </div>
-    </main>
+    </section>
+    <HouseGallery/>
+    </>
   );
 };
 

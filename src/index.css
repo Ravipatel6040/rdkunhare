@@ -1,1 +1,49 @@
 @import "tailwindcss";
+/* Tailwind imports
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*/
+
+/* Footer background using your image */
+.footer-bg {
+  background-image: url('/src/assets/Images/pattern.jpg');
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
+  background-color: #0a0a0a;
+}
+
+/* Ensure text is above background */
+.footer-bg * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ====== NEW: footer-main typography (applies to main footer columns) ====== */
+.footer-main {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 500;              /* 500 as requested */
+  color: rgb(157, 157, 157);     /* text color for body text in footer */
+  font-size: 16px;               /* base size */
+  line-height: 30px;             /* line height */
+}
+
+
+/* Smooth fade + slide-up animation */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.9s ease-out forwards;
+}
+

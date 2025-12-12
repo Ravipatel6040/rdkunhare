@@ -1,5 +1,7 @@
 import React from "react";
 import AboutSection from "../components/AboutSection";
+import FeaturesRow from "../components/FeaturesRow";
+import AboutPublic from "../components/AboutPublic";
 
 const About = () => {
   return (
@@ -19,6 +21,9 @@ const About = () => {
       </div>
     </section>
     <AboutSection/>
+    <FeaturesRow/>
+    <AboutPublic/>
+  
     </>
   );
 };

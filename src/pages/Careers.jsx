@@ -1,26 +1,24 @@
+import ContactCareer from "../components/ContactCareers";
+
 const Careers = () => {
   return (
-    <main className="max-w-7xl mx-auto px-4 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold mb-4">Careers</h1>
-      <p className="text-gray-700 mb-4">
-        Share open positions, hiring process, and career growth details here.
-      </p>
+    <>
+    <section className="w-full bg-black text-white h-40 sm:h-52 md:h-64 lg:h-65 flex items-center justify-center">
+      <div className="max-w-6xl mx-auto px-4 flex flex-col items-center text-center">
+        {/* Main heading */}
+      <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-[0.2em] uppercase">
+ Careers
+</h1>
 
-      <ul className="space-y-3">
-        <li className="border rounded-lg p-4">
-          <h2 className="font-semibold">Junior Architect</h2>
-          <p className="text-sm text-gray-600">
-            0–2 years experience • Full-time • On-site
-          </p>
-        </li>
-        <li className="border rounded-lg p-4">
-          <h2 className="font-semibold">Site Engineer</h2>
-          <p className="text-sm text-gray-600">
-            2–5 years experience • Full-time
-          </p>
-        </li>
-      </ul>
-    </main>
+
+        {/* Breadcrumb */}
+        <p className="mt-2 text-[10px] sm:text-xs md:text-sm font-medium tracking-[0.25em] uppercase text-gray-300">
+          Home / Careers
+        </p>
+      </div>
+    </section>
+    <ContactCareer/>
+    </>
   );
 };
 
