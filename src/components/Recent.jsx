@@ -21,7 +21,7 @@ const recentPosts = [
   },
 ];
 
-const RecentPost = () => {
+const Recent = () => {
   return (
     <div className="bg-white rounded-xl shadow-md p-6 animate-fadeIn">
       {/* BLOG label */}
@@ -122,4 +122,4 @@ const RecentPost = () => {
   );
 };
 
-export default RecentPost;
+export default Recent;

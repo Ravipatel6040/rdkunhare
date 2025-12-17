@@ -1,6 +1,6 @@
 import ContactWithMap from "../components/ContactWithMap";
 import HowWeWork from "../components/HowWeWork";
-import RecentPost from "../components/RecentPost";
+import Recent from "../components/Recent";
 import FeaturesRow from "../components/FeaturesRow";
 
 import RedesignDream from "../components/RedesignDream"
@@ -19,7 +19,7 @@ const Home = () => {
     <RedesignDream/>
     <HowWeWork/>
    
-    <RecentPost/>
+    <Recent/>
     <ContactWithMap/>
     </>
   );

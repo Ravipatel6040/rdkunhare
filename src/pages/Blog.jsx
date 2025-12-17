@@ -1,4 +1,4 @@
-import RecentPost from "../components/Recentpost";
+import Recent from "../components/Recent";
 
 const Blog = () => {
   return (
@@ -18,7 +18,7 @@ const Blog = () => {
         </p>
       </div>
     </section>
-    <RecentPost/>
+    <Recent/>
      </>
   );
 };
