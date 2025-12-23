@@ -1,6 +1,7 @@
 import ContactWithMap from "../components/ContactWithMap";
 import HowWeWork from "../components/HowWeWork";
-import Recent from "../components/Recent";
+// import Recent from "../components/Recent";
+import RecentBlog from "../components/RecentBlog";
 import FeaturesRow from "../components/FeaturesRow";
 
 import RedesignDream from "../components/RedesignDream"
@@ -15,11 +16,12 @@ const Home = () => {
      <AboutSection/>
       <FeaturesRow/>
     <WhyWeAreDifferent/>
-
+  <HowWeWork/>
     <RedesignDream/>
-    <HowWeWork/>
+
    
-    <Recent/>
+    {/* <Recent/> */}
+    <RecentBlog/>
     <ContactWithMap/>
     </>
   );

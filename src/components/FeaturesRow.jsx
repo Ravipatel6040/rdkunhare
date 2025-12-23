@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import icon1 from "../assets/Images/icone01.png";
 import icon2 from "../assets/Images/icone02.png";
@@ -6,35 +6,74 @@ import icon3 from "../assets/Images/icone03.png";
 import icon4 from "../assets/Images/icone04.png";
 
 const features = [
-  {
-    id: 1,
-    icon: icon1,
-    number: "8+",
-    label: "Years of Experience",
-  },
-  {
-    id: 2,
-    icon: icon2,
-    number: "10+",
-    label: "Team Members",
-  },
-  {
-    id: 3,
-    icon: icon3,
-    number: "50+",
-    label: "Project Success",
-  },
-  {
-    id: 4,
-    icon: icon4,
-    number: "100+",
-    label: "Happy Customers",
-  },
+  { id: 1, icon: icon1, number: 8, suffix: "+", label: "Years of Experience" },
+  { id: 2, icon: icon2, number: 10, suffix: "+", label: "Team Members" },
+  { id: 3, icon: icon3, number: 50, suffix: "+", label: "Project Success" },
+  { id: 4, icon: icon4, number: 100, suffix: "+", label: "Happy Customers" },
 ];
 
+// 🔹 Counter
+const AnimatedCounter = ({ value, suffix, start }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!start) {
+      setCount(0);
+      return;
+    }
+
+    let startValue = 0;
+    const duration = 4000;
+    const increment = Math.ceil(value / (duration / 16));
+
+    const timer = setInterval(() => {
+      startValue += increment;
+      if (startValue >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        setCount(startValue);
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [start, value]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+};
+
 export default function FeaturesRow() {
+  const sectionRef = useRef(null);
+  const [startCount, setStartCount] = useState(false);
+
+  // 👀 Observe section on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // ⏳ thoda delay
+          setTimeout(() => setStartCount(true), 300);
+        } else {
+          // reset when user scrolls away
+          setStartCount(false);
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       aria-label="company-stats"
       className="w-full relative"
       style={{
@@ -52,7 +91,6 @@ export default function FeaturesRow() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
-
           {features.map((item, index) => (
             <div
               key={item.id}
@@ -68,20 +106,19 @@ export default function FeaturesRow() {
                   className="
                     w-20 h-20 object-contain
                     transition-all duration-300
-
-                    /* DEFAULT WHITE */
                     filter brightness-0 invert
-
-                    /* HOVER + MOBILE TAP GOLD */
                     group-hover:[filter:invert(63%)_sepia(52%)_saturate(469%)_hue-rotate(358deg)_brightness(94%)_contrast(92%)]
-                    active:[filter:invert(63%)_sepia(52%)_saturate(469%)_hue-rotate(358deg)_brightness(94%)_contrast(92%)]
                   "
                 />
               </div>
 
-              {/* NUMBER */}
-              <h3 className="text-4xl md:text-5xl font-semi-bold text-white">
-                {item.number}
+              {/* COUNTER */}
+              <h3 className="text-4xl md:text-5xl font-semibold text-white">
+                <AnimatedCounter
+                  value={item.number}
+                  suffix={item.suffix}
+                  start={startCount}
+                />
               </h3>
 
               {/* LABEL */}
@@ -90,7 +127,6 @@ export default function FeaturesRow() {
               </p>
             </div>
           ))}
-
         </div>
       </div>
     </section>

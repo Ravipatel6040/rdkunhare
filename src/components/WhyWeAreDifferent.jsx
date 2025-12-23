@@ -24,19 +24,19 @@ const WhyWeAreDifferent = () => {
   return (
     <section className="py-20 bg-[#f7f7f7]">
       <div className="max-w-7xl mx-auto px-4 grid gap-12 lg:grid-cols-2 items-center">
-        
+
         {/* LEFT CONTENT */}
         <div>
-          <p className="text-sm tracking-widest text-gray-500 uppercase mb-3">
+          <h1 className="text-5xl font-bold mb-2">
             Why We Are Different
-          </p>
+          </h1>
 
-          <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-6">
+          <h2 className="text-4xl font-bold mb-6">
             SINCE WE SIMPLY <br />
             DON'T PLAN A SPACE
           </h2>
 
-          <p className="text-gray-600 leading-7 mb-10 max-w-xl">
+          <p className="text-xl text-gray-600 leading-8 mb-10 max-w-xl text-justify">
             We concentrate on the tale of your life and teach it in your
             current circumstance to make the space always rousing for you.
             Our client-focused plan approach.
@@ -50,16 +50,26 @@ const WhyWeAreDifferent = () => {
                   onClick={() =>
                     setOpenIndex(openIndex === index ? null : index)
                   }
-                  className="w-full flex justify-between items-center px-6 py-5 text-left font-semibold"
+                  className="
+                    w-full
+                    flex
+                    justify-between
+                    items-center
+                    px-6
+                    py-6
+                    text-left
+                    text-xl
+                    font-bold
+                  "
                 >
                   {item.title}
-                  <span className="text-xl">
+                  <span className="text-2xl">
                     {openIndex === index ? "−" : "+"}
                   </span>
                 </button>
 
                 {openIndex === index && (
-                  <div className="px-6 pb-5 text-gray-600">
+                  <div className="px-6 pb-6 text-lg text-gray-600 leading-7">
                     {item.content}
                   </div>
                 )}
@@ -68,9 +78,8 @@ const WhyWeAreDifferent = () => {
           </div>
         </div>
 
-        {/* RIGHT IMAGE WITH EFFECT */}
+        {/* RIGHT IMAGE */}
         <div className="relative group w-full rounded-md overflow-hidden shadow-lg">
-          {/* IMAGE */}
           <img
             src={plan}
             alt="Modern House"
@@ -85,17 +94,7 @@ const WhyWeAreDifferent = () => {
             "
           />
 
-          {/* OVERLAY */}
-          <div
-            className="
-              absolute
-              inset-0
-              bg-black/20
-         
-              transition-all
-              duration-700
-            "
-          />
+          <div className="absolute inset-0 bg-black/20 transition-all duration-700" />
         </div>
 
       </div>

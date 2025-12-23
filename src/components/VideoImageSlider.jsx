@@ -1,13 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, EffectCreative } from "swiper/modules";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-import "swiper/css";
-import "swiper/css/navigation";
-
-// Images
+// 👉 Local Images
 import Slider01 from "../assets/Images/slider01.png";
 import Slider02 from "../assets/Images/slider02.png";
 import Slider03 from "../assets/Images/slider03.jpg";
@@ -16,118 +10,163 @@ import Slider05 from "../assets/Images/slider05.png";
 import Slider06 from "../assets/Images/slider06.png";
 
 const slides = [
-  { left: Slider01, right: Slider02, title: "WE DESIGN YOUR DREAMS" },
-  { left: Slider03, right: Slider04, title: "THE NEW FUTURE OF CONSTRUCTION" },
-  { left: Slider05, right: Slider06, title: "UNIQUE INTERIOR DESIGNS" },
-];
-
-// 🔥 Animation sets per slide
-const slideAnimations = [
-  {
-    left: "animate-zoom-in",
-    right: "animate-slide-right",
-    text: "animate-fade-up",
-  },
-  {
-    left: "animate-zoom-out",
-    right: "animate-slide-up",
-    text: "animate-fade-left",
-  },
-  {
-    left: "animate-zoom-rotate",
-    right: "animate-slide-down",
-    text: "animate-fade-right",
-  },
+  { img: Slider01, lines: ["WE DESIGN", "YOUR", "DREAMS"] },
+  { img: Slider02, lines: ["THE NEW", "FUTURE OF", "CONSTRUCTION"] },
+  { img: Slider03, lines: ["WE DESIGN", "YOUR", "DREAMS"] },
+  { img: Slider04, lines: ["WE DESIGN", "YOUR", "DREAMS"] },
+  { img: Slider05, lines: ["THE NEW", "FUTURE OF", "CONSTRUCTION"] },
+  { img: Slider06, lines: ["WE DESIGN", "YOUR", "DREAMS"] },
 ];
 
 const VideoImageSlider = () => {
+  const [current, setCurrent] = useState(0);
+
+  // 🔁 AUTO SLIDE
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const prevSlide = () => {
+    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  };
+
   return (
-    <div className="relative w-full h-screen overflow-hidden font-sans">
-      <Swiper
-        modules={[Autoplay, Navigation, EffectCreative]}
-        grabCursor
-        effect="creative"
-        creativeEffect={{
-          prev: { shadow: true, translate: ["-20%", 0, -1] },
-          next: { translate: ["100%", 0, 0] },
-        }}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        navigation={{ prevEl: ".custom-prev", nextEl: ".custom-next" }}
-        loop
-        speed={1000}
-        className="w-full h-full"
-      >
-        {slides.map((slide, index) => {
-          const anim = slideAnimations[index % slideAnimations.length];
+    <div className="relative w-full overflow-hidden bg-black">
+      {/* HEIGHT CONTROL */}
+      <div className="relative h-[45vh] sm:h-[55vh] md:h-[70vh] lg:h-[85vh] xl:h-[90vh]">
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+              index === current ? "opacity-100 z-20" : "opacity-0 z-10"
+            }`}
+          >
+            {/* IMAGE */}
+            <img
+              src={slide.img}
+              alt={`Slide ${index + 1}`}
+              className="
+                w-[100%]
+             
+                object-cover
+                object-center
+                lg:object-contain
+                bg-black
+              "
+            />
 
-          return (
-            <SwiperSlide key={index} className="bg-black">
-              {({ isActive }) => (
-                <div className="relative w-full h-full flex flex-col md:flex-row overflow-hidden">
-
-                  {/* LEFT IMAGE */}
-                  <div className="w-full md:w-1/2 h-full overflow-hidden">
-                    <img
-                      src={slide.left}
-                      alt="design"
-                      className={`w-full h-full object-cover brightness-75 transition-transform duration-[6000ms]
-                        ${isActive ? anim.left : "scale-125"}`}
-                    />
-                  </div>
-
-                  {/* RIGHT IMAGE */}
-                  <div
-                    className={`w-full md:w-1/2 h-full absolute md:relative right-0 top-0 overflow-hidden z-10
-                      ${isActive ? anim.right : "translate-x-full"}`}
-                  >
-                    <img
-                      src={slide.right}
-                      alt="design-alt"
-                      className="w-full h-full object-cover brightness-75"
-                    />
-                  </div>
-
-                  {/* CONTENT */}
-                  <div className="absolute inset-0 z-20 flex items-center px-8 md:px-20 bg-black/20">
-                    <div
-                      className={`max-w-3xl ${
-                        isActive ? anim.text : "opacity-0"
-                      }`}
+            {/* OVERLAY */}
+            <div className="absolute inset-0 flex items-center bg-black/35">
+              <div className="max-w-7xl w-full px-6 sm:px-10 md:px-16">
+                {/* TEXT */}
+                <div className="space-y-1 sm:space-y-2">
+                  {slide.lines.map((line, i) => (
+                    <h1
+                      key={i}
+                      className="
+                        text-white font-extrabold uppercase
+                        text-2xl sm:text-3xl md:text-5xl lg:text-6xl
+                        leading-tight tracking-wide
+                        drop-shadow-xl
+                      "
                     >
-                      <h1 className="text-white text-5xl md:text-7xl font-bold leading-tight mb-8 drop-shadow-lg">
-                        {slide.title}
-                      </h1>
+                      {line}
+                    </h1>
+                  ))}
+                </div>
 
-                      <div className="flex flex-col items-start group">
-                        <Link
-                          to="/contact"
-                          className="inline-block text-sm font-semibold uppercase bg-white text-black px-10 py-4 transition-all duration-300 group-hover:bg-[#cb9d54] group-hover:text-white"
-                          style={{ letterSpacing: "2px" }}
-                        >
-                          LEARN MORE
-                        </Link>
+                {/* BUTTON */}
+                <div className="mt-8 sm:mt-10 inline-block group">
+                  <Link
+                    to="/"
+                    className="
+                      inline-block
+                      text-xs sm:text-sm
+                      font-semibold uppercase
+                      bg-white text-black
+                      px-6 sm:px-8
+                      py-3 sm:py-4
+                      rounded-sm
+                      transition-colors duration-300
+                      group-hover:bg-[#cb9d54]
+                      group-hover:text-white
+                    "
+                    style={{ letterSpacing: "1px" }}
+                  >
+                    LEARN MORE
+                  </Link>
 
-                        {/* underline (fixed width) */}
-                        <div className="mt-2 w-46 h-[2px] bg-white/40 transition-colors duration-500 group-hover:bg-[#cb9d54]" />
-                      </div>
-                    </div>
+                  {/* UNDERLINE */}
+                  <div className="mt-2 w-30 h-[2px] bg-gray-400/60 relative overflow-hidden">
+                    <span
+                      className="
+                        absolute left-0 top-0
+                        h-full w-full
+                        bg-[#cb9d54]
+                        scale-x-0
+                        origin-left
+                        transition-transform duration-300
+                        group-hover:scale-x-100
+                      "
+                    />
                   </div>
                 </div>
-              )}
-            </SwiperSlide>
-          );
-        })}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
-        {/* NAVIGATION */}
-        <div className="absolute bottom-10 right-10 z-30 flex gap-4">
-          <button className="custom-prev w-14 h-14 flex items-center justify-center border border-white/20 text-white rounded-full hover:bg-[#cb9d54] hover:border-[#cb9d54] transition-all">
-            <FaChevronLeft size={20} />
-          </button>
-          <button className="custom-next w-14 h-14 flex items-center justify-center border border-white/20 text-white rounded-full hover:bg-[#cb9d54] hover:border-[#cb9d54] transition-all">
-            <FaChevronRight size={20} />
-          </button>
-        </div>
-      </Swiper>
+      {/* PREV */}
+      <button
+        onClick={prevSlide}
+        className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4"
+      >
+        <span className="w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 flex items-center justify-center">
+          <svg
+            className="w-5 h-5 text-white"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </span>
+      </button>
+
+      {/* NEXT */}
+      <button
+        onClick={nextSlide}
+        className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4"
+      >
+        <span className="w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 flex items-center justify-center">
+          <svg
+            className="w-5 h-5 text-white"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </span>
+      </button>
     </div>
   );
 };

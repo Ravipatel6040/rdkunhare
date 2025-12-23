@@ -37,12 +37,32 @@ const HowWeWork = () => {
     <section className="py-16 bg-white">
       {/* Header */}
       <div className="text-center mb-12">
-        <p className="text-sm tracking-widest text-gray-400 uppercase">
-          3 Easy Steps
-        </p>
-        <h2 className="text-3xl md:text-4xl font-bold mt-2">
+
+        <h2 className="
+  text-2xl
+  sm:text-3xl
+  md:text-4xl
+  lg:text-5xl
+  font-bold
+  mt-2
+">
           HOW WE WORKS
         </h2>
+
+        <h3 className="
+  text-xl
+  sm:text-2xl
+  md:text-3xl
+  lg:text-4xl
+  font-bold
+ 
+  uppercase
+  mt-2
+">
+          3 Easy Steps
+        </h3>
+
+
       </div>
 
       {/* Cards */}
